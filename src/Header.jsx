@@ -1,16 +1,17 @@
-export default function Header () {
+export default function Header ( {score, highScore} ) {
     return (
-        <nav>
-            <h1>Gilmore</h1>
-            <div>
-                <p></p>
-                <p>score</p>
+        <nav className="header">
+            <h1 className="header-title">Gilmore</h1>
+            <div className="score-container">
+                <div className="score-current">
+                    <p className="header-score">{score}</p>
+                    <p className="score-label">score</p>
+                </div>
+                <div className="score-high">
+                    <p className="header-score">{highScore}</p>
+                    <p className="score-label">high score</p>
+                </div>
             </div>
-            <div>
-                <p></p>
-                <p>high score</p>
-            </div>
-            <p></p>
         </nav>
     )
 }
