@@ -8,13 +8,8 @@ function App() {
   const [pokemon, setPokemon] = useState([]);
   const [cards, setCards] = useState([]);
 
-
-  useEffect(() => {
-    setHighScore(currScore => Math.max(currScore, score));
-  }, [score])
-
   async function loadPokemon() {
-    const res = await fetch("https://pokeapi.co/api/v2/pokemon");
+    const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=16");
     const data = await res.json();
     setPokemon(data.results);
   }
@@ -33,7 +28,8 @@ function App() {
         return {
           id: data.id,
           name: data.name,
-          image: data.sprites["front_default"]
+          image: data.sprites["front_default"],
+          isClicked: false
         }
       }));
 
@@ -42,14 +38,40 @@ function App() {
     loadCard();
   }, [pokemon])
 
-  useEffect(() => {
-    console.log(cards);
-  }, [cards])
+  // function shuffleDeck() {
+
+  // }
+
+  function handleCardClick(cardID) {
+    const card = cards.find(c => c.id === cardID);
+
+    if (card.isClicked === true) {
+      setHighScore(oldHighScore => Math.max(oldHighScore, score));
+      setScore(0);
+      //displayModal();
+      return;
+    }
+
+    //mark the card as clicked then update state
+    const updatedDeck = cards.map(card => {
+      if (card.id === cardID) {
+        return {...card, isClicked: true}
+      }
+
+      return card;
+    })
+
+    setCards(updatedDeck);
+    setScore(oldScore => oldScore + 1);
+    setHighScore(oldHighScore => Math.max(oldHighScore, score));
+    // shuffleDeck();
+  }
 
   return (
     <>
       <Header score={score} highScore={highScore} />
-      <CardDeck cards={cards} />
+      <p className="instructions">Click an image to begin. Don't click the same image twice!</p>
+      <CardDeck cards={cards} handleCardClick={handleCardClick}/>
     </>
   )
 }

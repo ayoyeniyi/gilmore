@@ -7,7 +7,7 @@ body {
     padding: 1rem 2rem;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid black;
+    border-bottom: 1px solid black;
 }
 
 .score-container {
@@ -24,7 +24,25 @@ body {
     margin: 0;
 }
 
-.card-deck {
+.card-deck, .instructions {
     margin: 1rem 2rem;
+}
+
+.card-deck {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    width: 20%;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 0.2rem;
+}
+
+.pokemon-img {
+    max-width: 100%;
 }
 
