@@ -38,9 +38,16 @@ function App() {
     loadCard();
   }, [pokemon])
 
-  // function shuffleDeck() {
+  function shuffleDeck() {
+    const shuffled = [...cards];
 
-  // }
+    for (let i = cards.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+
+    setCards(shuffled);
+  }
 
   function handleCardClick(cardID) {
     const card = cards.find(c => c.id === cardID);
@@ -64,7 +71,7 @@ function App() {
     setCards(updatedDeck);
     setScore(oldScore => oldScore + 1);
     setHighScore(oldHighScore => Math.max(oldHighScore, score));
-    // shuffleDeck();
+    shuffleDeck();
   }
 
   return (
