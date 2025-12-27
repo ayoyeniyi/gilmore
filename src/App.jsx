@@ -1,13 +1,14 @@
 import Header from "./Header";
 import CardDeck from "./CardDeck";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 function App() {
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
   const [pokemon, setPokemon] = useState([]);
   const [cards, setCards] = useState([]);
-
+  const dialogRef = useRef(null);
+  
   async function loadPokemon() {
     const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=16");
     const data = await res.json();
@@ -38,19 +39,20 @@ function App() {
     loadCard();
   }, [pokemon])
 
-  function shuffleDeck() {
-    const shuffled = [...cards];
+  function shuffleDeck(deck) {
+    const shuffled = [...deck];
 
-    for (let i = cards.length - 1; i > 0; i--) {
+    for (let i = deck.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
 
-    setCards(shuffled);
+    return shuffled;
   }
 
   function handleCardClick(cardID) {
     const card = cards.find(c => c.id === cardID);
+    console.log(cards);
 
     if (card.isClicked === true) {
       setHighScore(oldHighScore => Math.max(oldHighScore, score));
@@ -68,10 +70,9 @@ function App() {
       return card;
     })
 
-    setCards(updatedDeck);
+    setCards(shuffleDeck(updatedDeck));
     setScore(oldScore => oldScore + 1);
     setHighScore(oldHighScore => Math.max(oldHighScore, score));
-    shuffleDeck();
   }
 
   return (
