@@ -3,7 +3,7 @@ export default function Card({ name, image, handleClickFn }) {
     return (
         <div className="card" onClick={handleClickFn}>
             <img src={image} alt={`Picture of ${capitalizedName}`} className="pokemon-img"/>
-            <p>{capitalizedName}</p>
+            <p className="label">{capitalizedName}</p>
         </div>
     )
 }

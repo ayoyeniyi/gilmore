@@ -46,3 +46,12 @@ body {
     max-width: 100%;
 }
 
+@media (max-width: 400px) {
+    .label {
+        font-size: 0.8rem;
+    }
+
+    .card {
+        width: 40%;
+    }
+}
