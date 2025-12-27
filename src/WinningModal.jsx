@@ -1,7 +1,7 @@
 import Modal from "./Modal"
 
-export default function WinningModal() {
+export default function WinningModal({ ref, restartFn, closeModal }) {
     return (
-        <Modal text={"You completed the game and won!"}/>
+        <Modal text={"Congratulations! You won!"} ref={ref} restartFn={restartFn} closeModal={closeModal}/>
     )
 }

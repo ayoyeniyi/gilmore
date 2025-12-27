@@ -3,8 +3,7 @@ export default function Modal({ ref, restartFn, closeModal, text }) {
         <div>
             <dialog ref={ref}>
                 <p>{text}</p>
-                <button onClick={restartFn}>Play Again</button>
-                <button onClick={closeModal}>Close</button>
+                <button onClick={() => {restartFn(); closeModal()}}>Play Again</button>
             </dialog>
         </div>
     )
