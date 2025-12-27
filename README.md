@@ -3,3 +3,5 @@ This is a Pokemon\* memory game based on the [Odin Project Memory Game](https://
 
 \*It's apparently a rite of passage to use a Pokemon API. Here goes.
 
+https://gilmore-phi.vercel.app/
+
